@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require_relative "./core"
+
+CONFIG_FILE_NAME = "Clibfile"
+ProjectDir = Dir.pwd
+
+class ClibError < StandardError
+
+end
+
+options = {}
+OptionParser.new do |parser|
+  parser.banner = "Usage: clib [options]"
+
+  parser.on("-rCOMMAND", "--run=COMMAND", "Run Command") do |v|
+    options[:run] = v
+  end
+end.parse!
+
+
+run_command = options[:run]
+
+cliber = CLibManager.new
+config_code = File.open("#{ProjectDir}/#{CONFIG_FILE_NAME}").read
+cliber.eval_code(config_code)
+
+if !run_command
+  raise ClibError, "command not found, check Help"
+end
+
+cliber.run_command run_command

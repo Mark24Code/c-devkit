@@ -1,0 +1,21 @@
+name "game"
+
+version "0.1.0"
+repo ""
+entry "src/main.c"
+output "dist/game"
+
+
+dependencies do
+  lib "raylib"
+end
+
+
+command "clean" do
+  `rm -rf dist/#{@app_name}`
+  puts "delete: #{@app_name}"
+end
+
+command "test" do
+  puts "test"
+end
