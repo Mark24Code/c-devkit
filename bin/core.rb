@@ -14,14 +14,14 @@ end
 class CLibManager
   attr_accessor :libs
   def initialize
-    @app_name = nil
+    @name = nil
     @entry = "main.c"
     @version = nil
     @repo = nil
     @libs = []
     @ccompiler = "gcc"
     @commands = {}
-    @output = @app_name
+    @output = @name
 
     @include_cflags = []
     @libs_cflags = []
@@ -47,8 +47,8 @@ class CLibManager
     @output = output_file_name
   end
 
-  def name(app_name)
-    @app_name = app_name
+  def name(name)
+    @name = name
   end
 
   def version(version_string)
@@ -145,7 +145,7 @@ class CLibManager
   end
 
   def build
-    @output = @output || @app_name
+    @output = @output || @name
 
     output = @output.split("/")
     output.pop
