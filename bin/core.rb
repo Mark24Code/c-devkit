@@ -32,6 +32,7 @@ class CLibManager
     register :install
     register :uninstall
     register :build
+    register :run
   end
 
   def ccompiler(cc = nil)
@@ -114,7 +115,7 @@ class CLibManager
     end
   end
 
-  def run(name, &block)
+  def run
     build
     system(@output)
   end
